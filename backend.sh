@@ -24,7 +24,7 @@ npm install
 
 dnf install mysql -y
 
-mysql -h  MYSQL-SERVER-IPADDRESS> -uroot -pIndian@123 < /app/schema/backend.sql
+mysql -h mysql-dev.kgsdevops.online -uroot -pIndian@123 < /app/schema/backend.sql
 
 systemctl daemon-reload
 
