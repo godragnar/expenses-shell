@@ -35,6 +35,7 @@ curl -o /tmp/backend.zip https://expense-artifacts.s3.amazonaws.com/backend.zip 
 echo  $?
 
 echo -e "${color} Extract Application Content \e[0m"
+# shellcheck disable=SC2164
 cd /app &>>$log_file
 unzip /tmp/backend.zip &>>$log_file
 echo  $?
@@ -53,6 +54,7 @@ mysql -h  mysql-dev.kgsdevops.online  -uroot -pIndian@123 < /app/schema/backend.
 echo  $?
 
 echo -e "${color} Starting Backend Services \e[0m"
+# shellcheck disable=SC2129
 systemctl daemon-reload &>>$log_file
 systemctl enable  backend &>>$log_file
 systemctl restart backend &>>$log_file
