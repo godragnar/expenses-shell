@@ -4,9 +4,9 @@ color="\e[33m"
 echo -e "${color} Disable NodeJS default Version \e[0m"
 dnf module disable nodejs -y &>>$log_file
 if [ $? -eq 0 ]; then
-    echo "\e[31m SUCCESS \e[0m"
+    echo -e  "\e[32m SUCCESS \e[0m"
 else
-  echo "\e[32m FAILURE \e[0m"
+  echo  -e" \e[31m FAILURE \e[0m"
 fi
 
 
