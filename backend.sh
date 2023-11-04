@@ -8,7 +8,6 @@ fi
 
 MYSQL_ROOT_PASSWORD=$1
 
-
 status_check() {
 if [ $? -eq 0 ]; then
     echo -e  "\e[32m SUCCESS \e[0m"
@@ -28,7 +27,6 @@ dnf module enable nodejs:18 -y &>>$log_file
 status_check
 echo -e "${color} Install NodeJS \e[0m"
 dnf install nodejs -y &>>$log_file
-
 status_check
 
 echo -e "${color} Copy Backend Service File \e[0m"
@@ -70,6 +68,7 @@ dnf install mysql -y &>>$log_file
 status_check
 
 echo -e "${color} Load Schema \e[0m"
+# shellcheck disable=SC1083
 mysql -h mysql-dev.kgsdevops.online -uroot -p{MYSQL_ROOT_PASSWORD} < /app/schema/backend.sql &>>$log_file
 status_check
 
