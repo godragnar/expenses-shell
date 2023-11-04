@@ -1,6 +1,11 @@
 log_file="/tmp/expense.log"
 color="\e[33m"
 
+if [  -z  $1 ]; then
+  echo Password Input Missing
+  exit
+fi
+
 echo -e "${color} Disable NodeJS default Version \e[0m"
 dnf module disable nodejs -y &>>$log_file
 if [ $? -eq 0 ]; then
@@ -101,7 +106,7 @@ else
 fi
 
 echo -e "${color} Load Schema \e[0m"
-mysql -h mysql-dev.kgsdevops.online -uroot -pIndian@123 < /app/schema/backend.sql &>>$log_file
+mysql -h mysql-dev.kgsdevops.online -uroot -p{MYSQL_ROOT_PASSWORD} < /app/schema/backend.sql &>>$log_file
 if [ $? -eq 0 ]; then
     echo -e  "\e[32m SUCCESS \e[0m"
 else
