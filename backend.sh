@@ -8,14 +8,8 @@ fi
 
 MYSQL_ROOT_PASSWORD=$1
 
-status_check() {
-if [ $? -eq 0 ]; then
-    echo -e  "\e[32m SUCCESS \e[0m"
-else
-  echo  -e" \e[31m FAILURE \e[0m"
-fi
+#Function for Exit Status for all commands which will don't  repeat the code-DRY(Don' kt Repeat Yourself)
 
-}
 
 echo -e "${color} Disable NodeJS default Version \e[0m"
 dnf module disable nodejs -y &>>$log_file
@@ -59,6 +53,7 @@ echo -e "${color} Extract Application Content \e[0m"
 cd /app &>>$log_file
 unzip /tmp/backend.zip &>>$log_file
 status_check
+
 echo -e "${color} Download NodeJS Dependencies \e[0m"
 npm install &>>$log_file
 status_check
@@ -68,7 +63,6 @@ dnf install mysql -y &>>$log_file
 status_check
 
 echo -e "${color} Load Schema \e[0m"
-# shellcheck disable=SC1083
 mysql -h mysql-dev.kgsdevops.online -uroot -p{MYSQL_ROOT_PASSWORD} < /app/schema/backend.sql &>>$log_file
 status_check
 
