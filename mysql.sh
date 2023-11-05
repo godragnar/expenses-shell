@@ -1,6 +1,13 @@
 
 source common.sh
 
+if [  -z  "$1" ]; then
+  echo Password Input Missing
+  exit
+fi
+
+MYSQL_ROOT_PASSWORD=$1
+
 echo -e "${color}  Disabling MYSql  \e[0m"
 dnf module disable mysql -y
 
@@ -17,6 +24,6 @@ systemctl enable  mysqld
 systemctl start mysqld
 
 
-mysql_secure_installation --set-root-pass Indian@123
+mysql_secure_installation --set-root-pass ${MYSQL_ROOT_PASSWORD}
 
 
