@@ -1,5 +1,4 @@
-log_file="/tmp/expense.log"
-color="\e[33m"
+source common.sh
 
 if [  -z  "$1" ]; then
   echo Password Input Missing
@@ -8,8 +7,6 @@ fi
 
 MYSQL_ROOT_PASSWORD=$1
 
-#Function for Exit Status for all commands which will don't  repeat the code-DRY(Don' kt Repeat Yourself)
-
 
 echo -e "${color} Disable NodeJS default Version \e[0m"
 dnf module disable nodejs -y &>>$log_file
@@ -17,8 +14,8 @@ status_check
 
 echo -e "${color} Enable NodeJS 18 Version \e[0m"
 dnf module enable nodejs:18 -y &>>$log_file
-
 status_check
+
 echo -e "${color} Install NodeJS \e[0m"
 dnf install nodejs -y &>>$log_file
 status_check
